@@ -1,0 +1,36 @@
+- hosts: bitops_servers
+  become: true
+  tasks:
+    - name: Install docker
+      include_tasks: tasks/install-docker.yml
+
+    - name: Install packages
+      yum:
+        name: 
+          - awslogs
+          - git
+          - gcc-c++
+          - openssl-devel
+        state: latest
+
+    - name: Start the logging agent
+      service:
+        name: awslogsd
+        state: started
+    - name: ensure the logging starts after reboots
+      command: systemctl enable awslogsd.service
+
+    - name: clone the repo
+      git:
+        repo: "{{ app_repo_full_url }}"
+        dest: "{{ app_install_root }}/{{ app_repo_name }}"
+      become: no
+
+    - name: Start docker-compose
+      community.docker.docker_compose:
+        project_src: "{{ app_install_root }}/{{ app_repo_name }}"
+        restarted: true
+      register: output
+
+    - ansible.builtin.debug:
+        var: output

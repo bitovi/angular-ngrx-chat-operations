@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -x
+
+
+echo "In deploy.sh"
+
+echo "Running BitOps for env: $ENVIRONMENT"
+docker run --rm --name bitops \
+-e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
+-e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
+-e AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}" \
+-e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \
+-e ENVIRONMENT="${ENVIRONMENT}" \
+-e ENVIRONMENT_HELM_SUBDIRECTORY="${ENVIRONMENT_HELM_SUBDIRECTORY}" \
+-e SKIP_DEPLOY_TERRAFORM="${SKIP_DEPLOY_TERRAFORM}" \
+-e SKIP_DEPLOY_HELM="${SKIP_DEPLOY_HELM}" \
+-e TF_STATE_BUCKET="${TF_STATE_BUCKET}" \
+-e DEFAULT_FOLDER_NAME="_default" \
+-v $(echo $GITHUB_WORKSPACE):/opt/bitops_deployment \
+bitovi/bitops:v1.0.18
