@@ -12,11 +12,13 @@ resource "aws_iam_instance_profile" "ec2_profile" {
   name = "${var.ops_repo_environment}-profile"
   role = var.ec2_iam_instance_profile
 }
+
 resource "aws_instance" "server" {
-  ami                         = var.aws_ami
+  # ubuntu
+  ami                         = "ami-052efd3df9dad4825"
   instance_type               = var.ec2_instance_type
   associate_public_ip_address = true
-  security_groups             = [var.security_group_name]
+  security_groups             = [aws_security_group.ec2_security_group.name]
   key_name                    = aws_key_pair.aws_key.key_name
   monitoring                  = true
   iam_instance_profile        = aws_iam_instance_profile.ec2_profile.name
