@@ -14,5 +14,5 @@ resource "aws_acm_certificate" "ssl_certificate" {
 
 resource "aws_acm_certificate_validation" "cert_validation" {
   provider        = aws
-  certificate_arn = aws_acm_certificate.ssl_certificate.arn
+  certificate_arn = aws_acm_certificate.ssl_certificate[0].arn
 }
