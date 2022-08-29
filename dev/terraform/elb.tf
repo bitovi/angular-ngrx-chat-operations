@@ -1,5 +1,5 @@
 data "aws_acm_certificate" "issued" {
-  domain = var.domain_name
+  domain = var.root_domain_name
 }
 
 resource "aws_elb" "vm" {
