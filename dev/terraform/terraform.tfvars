@@ -10,6 +10,9 @@ app_repo_name = "angular-ngrx-chat-api"
 # Path on the instance where the app will be cloned (do not include app_repo_name)
 app_install_root = "/home/ubuntu"
 
+# logs
+lb_access_bucket_name = "bitovi-angular-ngrx-chat-operations-dev-lb-access-logs"
+
 # domain stuff
 domain_name = "dev.angular-ngrx-chat.com"
 root_domain_name = "angular-ngrx-chat.com"

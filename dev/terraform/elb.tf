@@ -2,6 +2,13 @@ data "aws_acm_certificate" "issued" {
   domain = var.root_domain_name
 }
 
+resource "aws_s3_bucket" "lb_access_logs" {
+  bucket  = var.lb_access_bucket_name
+  tags = {
+    Name  = var.lb_access_bucket_name
+  }
+}
+
 resource "aws_elb" "vm" {
   count = var.domain_name == null ? 0 : 1
   name               = "angular-ngrx-chat-dev"
@@ -9,8 +16,7 @@ resource "aws_elb" "vm" {
   availability_zones = ["us-east-1a", "us-east-1b"]
 
   access_logs {
-    bucket        = "bitovi-angular-ngrx-chat-operations-dev-lb-access-logs"
-    bucket_prefix = "dev-logs"
+    bucket        = aws_s3_bucket.lb_access_logs.id
     interval      = 60
   }
 

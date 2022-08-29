@@ -38,6 +38,10 @@ variable "ec2_iam_instance_profile" {
   description = "IAM role for the ec2 instance"
   default = "NgRx_Chat_EC2_Role"
 }
+variable "lb_access_bucket_name" {
+  type = string
+  description = "s3 bucket for the lb access logs"
+}
 variable "domain_name" {
   type = string
   description = "[OPTIONAL] domain name for route53"
