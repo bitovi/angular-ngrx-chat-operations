@@ -9,6 +9,14 @@
     src: "{{ lookup('ansible.builtin.env', 'ANSIBLE_ROOT') }}/.env"
     dest: "{{ app_install_root }}/{{ app_repo_name }}/.env"
 
+- name: Start the logging agent
+  service:
+    name: awslogsd
+    state: started
+
+- name: ensure the logging starts after reboots
+  command: systemctl enable awslogsd.service
+
 - name: Start docker-compose
   docker_compose:
     project_src: "{{ app_install_root }}/{{ app_repo_name }}"
