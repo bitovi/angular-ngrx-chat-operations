@@ -1,22 +1,22 @@
 name: Deploy dev
 
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - "dev/*"
-      - "dev/**/*"
-      - ".github/workflows/deploy-dev.yaml"
 
-  # Allows you to run this workflow manually from the Actions tab
+on:
   workflow_dispatch:
+    inputs:
+      caller_repo_id:
+        description: 'Repo that called this one'
+        required: true
+
+concurrency:
+  group: environment-dev
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: bitops
+    - name: ${{ github.event.inputs.caller_repo_id }}
       env:
         ENVIRONMENT: dev
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
