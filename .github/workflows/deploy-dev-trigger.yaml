@@ -1,0 +1,29 @@
+name: Deploy dev
+
+
+on:
+  workflow_dispatch:
+    inputs:
+      caller_repo_id:
+        description: 'Repo that called this one'
+        required: true
+
+concurrency:
+  group: environment-dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: ${{ github.event.inputs.caller_repo_id }}
+      env:
+        ENVIRONMENT: dev
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN}}
+        AWS_DEFAULT_REGION: us-east-1
+        TF_STATE_BUCKET: bitovi-angular-ngrx-chat-operations-dev
+      run: |
+        echo "running _scripts/deploy/deploy.sh"
+        ./_scripts/deploy/deploy.sh
