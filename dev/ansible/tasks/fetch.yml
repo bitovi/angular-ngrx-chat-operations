@@ -3,4 +3,4 @@
   git:
     repo: "{{ app_repo_full_url }}"
     dest: "{{ app_install_root }}/{{ app_repo_name }}"
-    version: deployment-updates
+    # version: main | git version
