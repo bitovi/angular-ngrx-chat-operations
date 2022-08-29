@@ -1,0 +1,5 @@
+terraform:
+    cli: {}
+    options:
+        command: apply
+        version: "0.13.2"

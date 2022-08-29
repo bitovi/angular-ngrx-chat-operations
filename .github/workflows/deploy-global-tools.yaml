@@ -1,0 +1,32 @@
+name: Deploy global-tools
+
+on:
+  push:
+    # TODO: remove before merge
+    branches: [ add-domain ]
+    # TODO: uncomment before merge
+    # branches: [ main ]
+    paths:
+      - "global-tools/*"
+      - "global-tools/**/*"
+      - ".github/workflows/deploy-global-tools.yaml"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: bitops
+      env:
+        ENVIRONMENT: global-tools
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN}}
+        AWS_DEFAULT_REGION: us-east-1
+        TF_STATE_BUCKET: bitovi-angular-ngrx-chat-operations-global-tools
+      run: |
+        echo "running _scripts/deploy/deploy.sh"
+        ./_scripts/deploy/deploy.sh
