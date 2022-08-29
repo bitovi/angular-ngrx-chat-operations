@@ -9,17 +9,18 @@
     src: "{{ lookup('ansible.builtin.env', 'ANSIBLE_ROOT') }}/.env"
     dest: "{{ app_install_root }}/{{ app_repo_name }}/.env"
 
+# TODO: how to set up the logging agent?
+# docs: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
+# - name: download the logging agent
+#   get_url:
+#     url: https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+#     dest: "{{ app_install_root }}"
 
-- name: download the logging agent
-  command: |
-    curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
-    curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/AgentDependencies.tar.gz -O
-    tar xvf AgentDependencies.tar.gz -C /tmp/
-
-- name: start the logging agent
-  become: true
-  command: |
-    python ./awslogs-agent-setup.py --region us-east-1 --dependency-path /tmp/AgentDependencies
+# - name: unpack the logging agent
+#   become: true
+#   chdir: "{{ app_install_root }}"
+#   command: |
+#     dpkg -i -E ./amazon-cloudwatch-agent.deb
 
 - name: Start docker-compose
   docker_compose:
