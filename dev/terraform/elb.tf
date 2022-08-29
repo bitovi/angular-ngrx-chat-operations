@@ -37,7 +37,7 @@ resource "aws_elb" "vm" {
   count = var.domain_name == null ? 0 : 1
   name               = "angular-ngrx-chat-dev"
   security_groups = [aws_security_group.ec2_security_group.id]
-  availability_zones = ["us-east-1a", "us-east-1b"]
+  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e"]
 
   access_logs {
     bucket        = aws_s3_bucket.lb_access_logs.id
