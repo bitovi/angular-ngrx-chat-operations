@@ -6,7 +6,7 @@ resource "aws_elb" "vm" {
   count = var.domain_name == null ? 0 : 1
   name               = "angular-ngrx-chat-dev"
   security_groups = [aws_security_group.ec2_security_group.id]
-  availability_zones = ["us-east-1", "us-east-2"]
+  availability_zones = ["us-east-1a", "us-east-1b"]
 
   access_logs {
     bucket        = "bitovi-angular-ngrx-chat-operations-dev-lb-access-logs"
