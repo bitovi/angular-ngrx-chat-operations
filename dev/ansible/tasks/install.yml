@@ -12,7 +12,6 @@
     - 'python3-pip'
     - 'virtualenv'
     - 'python3-setuptools'
-    - 'awslogs'
 
 - name: Add Docker GPG apt Key
   apt_key:

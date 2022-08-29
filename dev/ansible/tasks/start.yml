@@ -9,13 +9,17 @@
     src: "{{ lookup('ansible.builtin.env', 'ANSIBLE_ROOT') }}/.env"
     dest: "{{ app_install_root }}/{{ app_repo_name }}/.env"
 
-- name: Start the logging agent
-  service:
-    name: awslogsd
-    state: started
 
-- name: ensure the logging starts after reboots
-  command: systemctl enable awslogsd.service
+- name: download the logging agent
+  command: |
+    curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
+    curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/AgentDependencies.tar.gz -O
+    tar xvf AgentDependencies.tar.gz -C /tmp/
+
+- name: start the logging agent
+  become: true
+  command: |
+    python ./awslogs-agent-setup.py --region us-east-1 --dependency-path /tmp/AgentDependencies
 
 - name: Start docker-compose
   docker_compose:
