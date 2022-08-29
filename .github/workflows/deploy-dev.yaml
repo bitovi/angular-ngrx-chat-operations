@@ -2,10 +2,12 @@ name: Deploy dev
 
 on:
   push:
-    # TODO: remove before merge
-    branches: [ logs ]
-    # TODO: uncomment before merge
-    # branches: [ main ]
+    branches:
+      - main
+
+      # TODO: remove before merge
+      # to test this branch, uncomment this
+      # - logs
     paths:
       - "dev/*"
       - "dev/**/*"
