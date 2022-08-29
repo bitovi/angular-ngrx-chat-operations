@@ -9,3 +9,7 @@ app_repo_name = "angular-ngrx-chat-api"
 
 # Path on the instance where the app will be cloned (do not include app_repo_name)
 app_install_root = "/home/ubuntu"
+
+# domain stuff
+domain_name = "dev.angular-ngrx-chat.com"
+root_domain_name = "angular-ngrx-chat.com"

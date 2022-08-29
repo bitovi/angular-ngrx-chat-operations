@@ -38,3 +38,11 @@ variable "ec2_iam_instance_profile" {
   description = "IAM role for the ec2 instance"
   default = "NgRx_Chat_EC2_Role"
 }
+variable "domain_name" {
+  type = string
+  description = "[OPTIONAL] domain name for route53"
+}
+variable "root_domain_name" {
+  type = string
+  description = "root domain name without any subdomains"
+}

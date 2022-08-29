@@ -1,0 +1,21 @@
+data "aws_route53_zone" "selected" {
+  name  = "${var.root_domain_name}"
+  tags  = {
+    OperationsRepo = "angular-ngrx-chat-operations"
+    OperationsRepoEnvironment = "global-tools"
+    created_with = "terraform"
+  }   
+}
+
+resource "aws_route53_record" "dev" {
+  count = var.domain_name == null ? 0 : 1
+  zone_id = data.aws_route53_zone.selected.zone_id
+  name    = var.domain_name
+  type    = "A"
+
+  alias {
+    name                   = aws_elb.vm[0].dns_name
+    zone_id                = aws_elb.vm[0].zone_id
+    evaluate_target_health = true
+  }
+}
