@@ -2,8 +2,7 @@ name: Deploy dev
 
 on:
   push:
-    # TODO: remove force-rebuild
-    branches: [ main, force-rebuild ]
+    branches: [ main ]
     paths:
       - "dev/*"
       - "dev/**/*"
