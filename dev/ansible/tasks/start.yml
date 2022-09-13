@@ -13,6 +13,7 @@
   docker_compose:
     project_src: "{{ app_install_root }}/{{ app_repo_name }}"
     restarted: true
+    build: yes
   register: output
 
 - ansible.builtin.debug:
