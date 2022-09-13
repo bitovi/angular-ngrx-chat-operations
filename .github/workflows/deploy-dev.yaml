@@ -2,8 +2,7 @@ name: Deploy dev
 
 on:
   push:
-    # TODO: remove fix-ansible-clone before merge
-    branches: [ main, fix-ansible-clone ]
+    branches: [ main ]
     paths:
       - "dev/*"
       - "dev/**/*"
