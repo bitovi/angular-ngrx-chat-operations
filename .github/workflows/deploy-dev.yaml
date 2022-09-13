@@ -2,8 +2,7 @@ name: Deploy dev
 
 on:
   push:
-    # TODO: remove 
-    branches: [ main, fix-lb-protocol-for-wss ]
+    branches: [ main ]
     paths:
       - "dev/*"
       - "dev/**/*"
