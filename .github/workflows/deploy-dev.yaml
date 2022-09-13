@@ -2,7 +2,8 @@ name: Deploy dev
 
 on:
   push:
-    branches: [ main ]
+    # TODO: remove fix-ansible-clone before merge
+    branches: [ main, fix-ansible-clone ]
     paths:
       - "dev/*"
       - "dev/**/*"
@@ -24,6 +25,8 @@ jobs:
         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN}}
         AWS_DEFAULT_REGION: us-east-1
         TF_STATE_BUCKET: bitovi-angular-ngrx-chat-operations-dev
+        # TODO: remove before merge
+        SKIP_DEPLOY_TERRAFORM: "1"
       run: |
         echo "running _scripts/deploy/deploy.sh"
         ./_scripts/deploy/deploy.sh

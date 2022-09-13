@@ -3,4 +3,6 @@
   git:
     repo: "{{ app_repo_full_url }}"
     dest: "{{ app_install_root }}/{{ app_repo_name }}"
+    force: yes
+    update: yes
     # version: main | git version
