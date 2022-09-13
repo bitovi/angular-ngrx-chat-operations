@@ -1,4 +1,5 @@
 ansible:
     cli:
       extra-vars: "@extra-vars.json"
-    options: {}
+    options:
+      verbosity: 4
