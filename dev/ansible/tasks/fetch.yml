@@ -3,4 +3,10 @@
   git:
     repo: "{{ app_repo_full_url }}"
     dest: "{{ app_install_root }}/{{ app_repo_name }}"
-    # version: main | git version
+    force: yes
+    update: yes
+    version: main
+  register: fetch_output
+
+- ansible.builtin.debug:
+    var: fetch_output
