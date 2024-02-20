@@ -17,5 +17,6 @@ docker run --rm --name bitops \
 -e SKIP_DEPLOY_HELM="${SKIP_DEPLOY_HELM}" \
 -e TF_STATE_BUCKET="${TF_STATE_BUCKET}" \
 -e DEFAULT_FOLDER_NAME="_default" \
+-e TERRAFORM_DESTROY="${TERRAFORM_DESTROY}" \
 -v $(echo $GITHUB_WORKSPACE):/opt/bitops_deployment \
 bitovi/bitops:v1.0.18
