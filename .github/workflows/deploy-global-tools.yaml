@@ -24,6 +24,7 @@ jobs:
         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN}}
         AWS_DEFAULT_REGION: us-east-1
         TF_STATE_BUCKET: bitovi-angular-ngrx-chat-operations-global-tools
+        TERRAFORM_DESTROY: true
       run: |
         echo "running _scripts/deploy/deploy.sh"
         ./_scripts/deploy/deploy.sh
